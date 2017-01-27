@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Added by:</strong>
+  <%= @comment.user_id %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @comment.body %>
+</p>
+
+<% if cookies[:admin] || @comment.user_id == cookies[:username] %>
+<% then %>
+<%= link_to 'Edit', edit_comment_path(@comment) %> 
+<%= link_to 'Back', Post.find(@comment.post_id) %>
+
+<% end %>

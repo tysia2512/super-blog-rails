@@ -1,0 +1,7 @@
+<tbody>
+  <% @comments.each do |comment| %>
+    <tr>
+      <td> <%=comment.title %> </td>
+    </tr>
+  <% end %>
+</tbody>

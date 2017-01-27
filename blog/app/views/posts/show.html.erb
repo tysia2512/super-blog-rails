@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+<% if cookies[:username].nil? %>
+<% then %>
+  <h1>You must be logged in to add comments</h1>
+  <%= link_to "Register", new_user_path %>
+  <%= link_to "Login", login_path %>
+<% else %>
+  <h4>logged as</h4>
+  <%= cookies[:username] %>
+  <%= link_to "Log out", logout_path, method: "delete" %>
+  <%= link_to "Comment", new_comment_path(:post_id => @post.id) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time added</th>
+      <th>User</th>
+      <th>Comment</th>
+      <th colspan="5"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+	<td><%= comment.created_at %></td>
+        <td><%= comment.user_id %></td>
+        <td><%= comment.body %></td>
+        <td><%= link_to 'Show', comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
